@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😂 Wiggle Wars - The Funniest Game Ever!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #feca57;
+            --accent: #48dbfb;
+            --dark: #2d3436;
+            --light: #fff;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+            background-size: 400% 400%;
+            animation: rainbowBG 10s ease infinite;
+            font-family: 'Fredoka One', cursive;
+            overflow-x: hidden;
+        }
+
+        @keyframes rainbowBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 30px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: var(--light);
+            text-shadow: 2px 2px 0 var(--dark);
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            padding: 10px 25px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.1rem;
+            color: var(--light);
+            background: transparent;
+            border: 3px solid var(--light);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--light);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            margin-top: 100px;
+        }
+
+        .title {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: #fff;
+            text-shadow: 
+                4px 4px 0 #ff6b6b,
+                8px 8px 0 #2d3436,
+                -2px -2px 0 #feca57;
+            animation: bounce 1s ease-in-out infinite;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #fff;
+            text-shadow: 2px 2px 0 #2d3436;
+            margin-bottom: 40px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .emoji-float {
+            position: fixed;
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        .game-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 15px 0 #2d3436,
+                0 25px 40px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 
+                0 25px 0 #2d3436,
+                0 35px 50px rgba(0,0,0,0.3);
+        }
+
+        .game-card:hover::before {
+            animation: shine 0.5s ease;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; opacity: 1; }
+            100% { left: 150%; opacity: 0; }
+        }
+
+        .card-emoji {
+            font-size: 5rem;
+            display: block;
+            margin-bottom: 20px;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+
+        .game-card:nth-child(1) .card-emoji { animation-delay: 0s; }
+        .game-card:nth-child(2) .card-emoji { animation-delay: 0.2s; }
+        .game-card:nth-child(3) .card-emoji { animation-delay: 0.4s; }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .card-title {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: #2d3436;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .card-desc {
+            font-size: 1.1rem;
+            color: #636e72;
+            line-height: 1.6;
+        }
+
+        .play-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 40px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: #fff;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #c0392b;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 13px 0 #c0392b;
+        }
+
+        .play-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #c0392b;
+        }
+
+        .mascot {
+            font-size: 8rem;
+            margin: 30px 0;
+            animation: dance 0.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes dance {
+            0%, 100% { transform: scale(1) rotate(-10deg); }
+            50% { transform: scale(1.1) rotate(10deg); }
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.9);
+            padding: 25px 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 0 #2d3436;
+        }
+
+        .stat-number {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            color: #ff6b6b;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #636e72;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            top: -20px;
+            animation: fall linear infinite;
+            z-index: 100;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* Game Views */
+        .game-view {
+            display: none;
+        }
+
+        .game-view.active {
+            display: block;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            padding: 12px 25px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(0,0,0,0.8);
+            transform: scale(1.05);
+        }
+
+        /* Wacky Races Game */
+        .race-track {
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+            box-shadow: 0 20px 0 #2d3436;
+        }
+
+        .race-player {
+            font-size: 4rem;
+            transition: all 0.3s ease;
+        }
+
+        .race-track-inner {
+            background: linear-gradient(90deg, #2d3436 0%, #636e72 50%, #2d3436 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .race-lane {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .race-progress {
+            flex: 1;
+            height: 30px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .race-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            border-radius: 15px;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+        }
+
+        .race-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .race-btn {
+            padding: 20px 40px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .race-btn.move { background: linear-gradient(135deg, #00b894, #00cec9); box-shadow: 0 8px 0 #006266; }
+        .race-btn.special { background: linear-gradient(135deg, #e17055, #fdcb6e); box-shadow: 0 8px 0 #d35400; }
+        .race-btn.reset { background: linear-gradient(135deg, #6c5ce7, #a29bfe); box-shadow: 0 8px 0 #2d3436; }
+
+        .race-btn:hover { transform: translateY(-5px); }
+        .race-btn:active { transform: translateY(5px); box-shadow: 0 3px 0; }
+
+        /* Prank Master Game */
+        .prank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .prank-item {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 0 #2d3436;
+        }
+
+        .prank-item:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 20px 0 #2d3436;
+        }
+
+        .prank-item.unlocked {
+            background: linear-gradient(135deg, #00b894, #55efc4);
+        }
+
+        .prank-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .prank-name {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: #2d3436;
+        }
+
+        .prank-desc {
+            font-size: 0.9rem;
+            color: #636e72;
+            margin-top: 10px;
+        }
+
+        /* Laugh Olympics Game */
+        .olympics-events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .event-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 35px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 12px 0 #2d3436;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::after {
+            content: '🏅';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .event-card:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .event-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .event-name {
+            font-family: 'Bangers', cursive;
+            font-size: 1.6rem;
+            color: #2d3436;
+        }
+
+        .event-difficulty {
+            display: flex;
+            gap: 5px;
+            margin-top: 15px;
+        }
+
+        .difficulty-star {
+            font-size: 1.5rem;
+            color: #dfe6e9;
+        }
+
+        .difficulty-star.filled {
+            color: #fdcb6e;
+        }
+
+        /* Score Display */
+        .score-display {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 20px 30px;
+            border-radius: 20px;
+            color: #fff;
+            z-index: 999;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .score-value {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: #feca57;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .stats {
+                gap: 20px;
+            }
+            .stat-box {
+                padding: 15px 25px;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+            .score-display {
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+            }
+            .back-btn {
+                top: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="logo" onclick="showView('home')">😂 WIGGLE WARS</div>
+        <nav class="nav-links">
+            <button class="nav-btn active" onclick="showView('home')">🏠 Home</button>
+            <button class="nav-btn" onclick="showView('races')">🕹️ Races</button>
+            <button class="nav-btn" onclick="showView('pranks')">🎯 Pranks</button>
+            <button class="nav-btn" onclick="showView('olympics')">🏆 Olympics</button>
+        </nav>
+    </header>
+
+    <!-- Home View -->
+    <div id="home" class="game-view active">
+        <div class="container main-content">
+            <h1 class="title">😂 WIGGLE WARS</h1>
+            <p class="subtitle">🎮 The Most Hilarious Game You'll Ever Play! 🎮</p>
+            
+            <div class="mascot">🤪</div>
+            
+            <div class="game-cards">
+                <div class="game-card" onclick="showView('races')">
+                    <span class="card-emoji">🕹️</span>
+                    <h2 class="card-title">WACKY RACES</h2>
+                    <p class="card-desc">Race through crazy courses with unpredictable obstacles! Ride chickens, hoverboards, and who knows what else!</p>
+                    <button class="play-btn">PLAY NOW 🏁</button>
+                </div>
+                
+                <div class="game-card" onclick="showView('pranks')">
+                    <span class="card-emoji">🎯</span>
+                    <h2 class="card-title">PRANK MASTER</h2>
+                    <p class="card-desc">Pull off the most epic pranks ever! From whoopee cushion chairs to fake spider drops!</p>
+                    <button class="play-btn">PLAY NOW 🎉</button>
+                </div>
+                
+                <div class="game-card" onclick="showView('olympics')">
+                    <span class="card-emoji">🏆</span>
+                    <h2 class="card-title">LAUGH OLYMPICS</h2>
+                    <p class="card-desc">Compete in ridiculous mini-games! Face-melting funny challenges that will make you snort with laughter!</p>
+                    <button class="play-btn">PLAY NOW 🥇</button>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">😂 Laughs</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">500K</div>
+                    <div class="stat-label">🎮 Players</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">10K</div>
+                    <div class="stat-label">⭐ Reviews</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wacky Races View -->
+    <div id="races" class="game-view">
+        <button class="back-btn" onclick="showView('home')">⬅ Back</button>
+        <div class="score-display">
+            <div class="score-label">🏁 Races Won</div>
+            <div class="score-value" id="raceScore">0</div>
+        </div>
+        <div class="container main-content">
+            <h1 class="title">🕹️ WACKY RACES</h1>
+            <p class="subtitle">🏁 Race to the Finish Line! 🏁</p>
+            
+            <div class="race-track">
+                <div class="race-track-inner">
+                    <div class="race-lane">
+                        <span class="race-player">🏎️</span>
+                        <div class="race-progress">
+                            <div class="race-bar" id="playerBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="race-lane">
+                        <span class="race-player">🚗</span>
+                        <div class="race-progress">
+                            <div class="race-bar" id="cpu1Bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="race-lane">
+                        <span class="race-player">🛵</span>
+                        <div class="race-progress">
+                            <div class="race-bar" id="cpu2Bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="race-controls">
+                    <button class="race-btn move" onclick="movePlayer()">💨 MOVE!</button>
+                    <button class="race-btn special" onclick="useSpecial()">⚡ SPECIAL</button>
+                    <button class="race-btn reset" onclick="resetRace()">🔄 NEW RACE</button>
+                </div>
+                
+                <p style="margin-top: 30px; color: #636e72; font-size: 1.2rem;">
+                    🎯 Click MOVE to advance, SPECIAL gives a boost! First to 100% wins!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prank Master View -->
+    <div id="pranks" class="game-view">
+        <button class="back-btn" onclick="showView('home')">⬅ Back</button>
+        <div class="score-display">
+            <div class="score-label">😈 Pranks Pulled</div>
+            <div class="score-value" id="prankScore">0</div>
+        </div>
+        <div class="container main-content">
+            <h1 class="title">🎯 PRANK MASTER</h1>
+            <p class="subtitle">😜 Pull Off the Ultimate Pranks! 😜</p>
+            
+            <div class="prank-grid">
+                <div class="prank-item" onclick="pullPrank('whoopee')">
+                    <div class="prank-icon">💨</div>
+                    <div class="prank-name">Whoopee Cushion</div>
+                    <div class="prank-desc">The classic prank that never gets old!</div>
+                </div>
+                <div class="prank-item" onclick="pullPrank('spider')">
+                    <div class="prank-icon">🕷️</div>
+                    <div class="prank-name">Fake Spider</div>
+                    <div class="prank-desc">Drop a spider from above!</div>
+                </div>
+                <div class="prank-item" onclick="pullPrank('ice')">
+                    <div class="prank-icon">🧊</div>
+                    <div class="prank-name">Ice Cream Surprise</div>
+                    <div class="prank-desc">The frozen treat that bites back!</div>
+                </div>
+                <div class="prank-item" onclick="pullPrank('scream')">
+                    <div class="prank-icon">📢</div>
+                    <div class="prank-name">Air Horn Chair</div>
+                    <div class="prank-desc">The loudest seat in the house!</div>
+                </div>
+                <div class="prank-item" onclick="pullPrank('hand')">
+                    <div class="prank-icon">🖐️</div>
+                    <div class="prank-name">Fake Hand</div>
+                    <div class="prank-desc">Reach out and grab someone!</div>
+                </div>
+                <div class="prank-item" onclick="pullPrank('snake')">
+                    <div class="prank-icon">🐍</div>
+                    <div class="prank-name">Snake in Can</div>
+                    <div class="prank-desc">The ultimate surprise!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Laugh Olympics View -->
+    <div id="olympics" class="game-view">
+        <button class="back-btn" onclick="showView('home')">⬅ Back</button>
+        <div class="score-display">
+            <div class="score-label">🥇 Medals</div>
+            <div class="score-value" id="olympicsScore">0</div>
+        </div>
+        <div class="container main-content">
+            <h1 class="title">🏆 LAUGH OLYMPICS</h1>
+            <p class="subtitle">🥇 Compete in Ridiculous Challenges! 🥇</p>
+            
+            <div class="olympics-events">
+                <div class="event-card" onclick="playEvent('dance')">
+                    <div class="event-icon">💃</div>
+                    <div class="event-name">Dance Battle</div>
+                    <div class="event-difficulty">
+                        <span class="difficulty-star filled">⭐</span>
+                        <span class="difficulty-star">⭐</span>
+                        <span class="difficulty-star">⭐</span>
+                    </div>
+                </div>
+                <div class="event-card" onclick="playEvent('laugh')">
+                    <div class="event-icon">😂</div>
+                    <div class="event-name">Laugh Contest</div>
+                    <div class="event-difficulty">
+                        <span class="difficulty-star filled">⭐</span>
+                        <span class="difficulty-star filled">⭐</span>
+                        <span class="difficulty-star">⭐</span>
+                    </div>
+                </div>
+                <div class="event-card" onclick="playEvent('face')">
+                    <div class="event-icon">😝</div>
+                    <div class="event-name">Face Makeover</div>
+                    <div class="event-difficulty">
+                        <span class="difficulty-star filled">⭐</span>
+                        <span class="difficulty-star">⭐</span>
+                        <span class="difficulty-star">⭐</span>
+                    </div>
+                </div>
+                <div class="event-card" onclick="playEvent('impression')">
+                    <div class="event-icon">🎭</div>
+                    <div class="event-name">Impression Challenge</div>
+                    <div class="event-difficulty">
+                        <span class="difficulty-star filled">⭐</span>
+                        <span class="difficulty-star filled">⭐</span>
+                        <span class="difficulty-star filled">⭐</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // View Management
+        function showView(viewId) {
+            document.querySelectorAll('.game-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(viewId).classList.add('active');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Scores
+        let raceWins = 0;
+        let prankCount = 0;
+        let medals = 0;
+
+        // Floating emoji background
+        const emojis = ['🎈', '⭐', '🌈', '🎉', '💫', '🎊', '🍕', '🚀', '🦄', '🎃'];
+        
+        function createFloatingEmoji() {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji-float';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = '-50px';
+            emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            emoji.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 5000);
+        }
+        
+        setInterval(createFloatingEmoji, 800);
+        
+        // Confetti effect
+        const confettiColors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 4000);
+        }
+        
+        setInterval(createConfetti, 300);
+        
+        // Card click effect
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.95) rotate(0deg)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // ===== WACKY RACES GAME =====
+        let playerPos = 0;
+        let cpu1Pos = 0;
+        let cpu2Pos = 0;
+        let raceOver = false;
+
+        function movePlayer() {
+            if (raceOver) return;
+            const move = Math.floor(Math.random() * 20) + 10;
+            playerPos = Math.min(100, playerPos + move);
+            updateRaceBars();
+            checkRaceWinner();
+            moveCPU();
+        }
+
+        function useSpecial() {
+            if (raceOver) return;
+            const boost = Math.floor(Math.random() * 30) + 20;
+            playerPos = Math.min(100, playerPos + boost);
+            updateRaceBars();
+            checkRaceWinner();
+            moveCPU();
+        }
+
+        function moveCPU() {
+            cpu1Pos = Math.min(100, cpu1Pos + Math.floor(Math.random() * 25) + 5);
+            cpu2Pos = Math.min(100, cpu2Pos + Math.floor(Math.random() * 25) + 5);
+            updateRaceBars();
+            checkRaceWinner();
+        }
+
+        function updateRaceBars() {
+            document.getElementById('playerBar').style.width = playerPos + '%';
+            document.getElementById('cpu1Bar').style.width = cpu1Pos + '%';
+            document.getElementById('cpu2Bar').style.width = cpu2Pos + '%';
+        }
+
+        function checkRaceWinner() {
+            if (playerPos >= 100 && !raceOver) {
+                raceOver = true;
+                raceWins++;
+                document.getElementById('raceScore').textContent = raceWins;
+                createConfetti();
+                createConfetti();
+                createConfetti();
+                setTimeout(() => alert('🎉 YOU WON! 🏁'), 100);
+            } else if ((cpu1Pos >= 100 || cpu2Pos >= 100) && !raceOver) {
+                raceOver = true;
+                setTimeout(() => alert('😢 You lost! Try again!'), 100);
+            }
+        }
+
+        function resetRace() {
+            playerPos = 0;
+            cpu1Pos = 0;
+            cpu2Pos = 0;
+            raceOver = false;
+            updateRaceBars();
+        }
+
+        // ===== PRANK MASTER GAME =====
+        function pullPrank(prankType) {
+            prankCount++;
+            document.getElementById('prankScore').textContent = prankCount;
+            
+            const messages = {
+                'whoopee': '💨 PFWOOOOP! The cushion strikes again!',
+                'spider': '🕷️ AAAAAHH! Fake spider deployed!',
+                'ice': '🧊 BRAIN FREEZE! The surprise dessert!',
+                'scream': '📢 BWAAAH! Air horn surprise!',
+                'hand': '🖐️ GOTCHA! The fake hand grabs!',
+                'snake': '🐍 YIKES! Snake in a can!'
+            };
+            
+            alert(messages[prankType]);
+            createConfetti();
+        }
+
+        // ===== LAUGH OLYMPICS GAME =====
+        function playEvent(eventType) {
+            const events = {
+                'dance': { name: 'Dance Battle', winChance: 0.7 },
+                'laugh': { name: 'Laugh Contest', winChance: 0.6 },
+                'face': { name: 'Face Makeover', winChance: 0.8 },
+                'impression': { name: 'Impression Challenge', winChance: 0.4 }
+            };
+            
+            const event = events[eventType];
+            const won = Math.random() < event.winChance;
+            
+            if (won) {
+                medals++;
+                document.getElementById('olympicsScore').textContent = medals;
+                alert(`🥇 GOLD MEDAL! You won the ${event.name}!`);
+                createConfetti();
+                createConfetti();
+                createConfetti();
+            } else {
+                alert(`😢 No medal this time. Keep trying in ${event.name}!`);
+            }
+        }
+    </script>
+</body>
+</html>
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #fff;
+            text-shadow: 2px 2px 0 #2d3436;
+            margin-bottom: 40px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .emoji-float {
+            position: fixed;
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        .game-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 15px 0 #2d3436,
+                0 25px 40px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 
+                0 25px 0 #2d3436,
+                0 35px 50px rgba(0,0,0,0.3);
+        }
+
+        .game-card:hover::before {
+            animation: shine 0.5s ease;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; opacity: 1; }
+            100% { left: 150%; opacity: 0; }
+        }
+
+        .card-emoji {
+            font-size: 5rem;
+            display: block;
+            margin-bottom: 20px;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+
+        .game-card:nth-child(1) .card-emoji { animation-delay: 0s; }
+        .game-card:nth-child(2) .card-emoji { animation-delay: 0.2s; }
+        .game-card:nth-child(3) .card-emoji { animation-delay: 0.4s; }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .card-title {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: #2d3436;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .card-desc {
+            font-size: 1.1rem;
+            color: #636e72;
+            line-height: 1.6;
+        }
+
+        .play-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 40px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: #fff;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #c0392b;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 13px 0 #c0392b;
+        }
+
+        .play-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #c0392b;
+        }
+
+        .mascot {
+            font-size: 8rem;
+            margin: 30px 0;
+            animation: dance 0.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes dance {
+            0%, 100% { transform: scale(1) rotate(-10deg); }
+            50% { transform: scale(1.1) rotate(10deg); }
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.9);
+            padding: 25px 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 0 #2d3436;
+        }
+
+        .stat-number {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            color: #ff6b6b;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #636e72;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            top: -20px;
+            animation: fall linear infinite;
+            z-index: 100;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats {
+                gap: 20px;
+            }
+            .stat-box {
+                padding: 15px 25px;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">😂 WIGGLE WARS</h1>
+        <p class="subtitle">🎮 The Most Hilarious Game You'll Ever Play! 🎮</p>
+        
+        <div class="mascot">🤪</div>
+        
+        <div class="game-cards">
+            <div class="game-card">
+                <span class="card-emoji">🕹️</span>
+                <h2 class="card-title">WACKY RACES</h2>
+                <p class="card-desc">Race through crazy courses with unpredictable obstacles! Ride chickens, hoverboards, and who knows what else!</p>
+                <button class="play-btn">PLAY NOW 🏁</button>
+            </div>
+            
+            <div class="game-card">
+                <span class="card-emoji">🎯</span>
+                <h2 class="card-title">PRANK MASTER</h2>
+                <p class="card-desc">Pull off the most epic pranks ever! From whoopee cushion chairs to fake spider drops!</p>
+                <button class="play-btn">PLAY NOW 🎉</button>
+            </div>
+            
+            <div class="game-card">
+                <span class="card-emoji">🏆</span>
+                <h2 class="card-title">LAUGH OLYMPICS</h2>
+                <p class="card-desc">Compete in ridiculous mini-games! Face-melting funny challenges that will make you snort with laughter!</p>
+                <button class="play-btn">PLAY NOW 🥇</button>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number">1M+</div>
+                <div class="stat-label">😂 Laughs</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">500K</div>
+                <div class="stat-label">🎮 Players</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">10K</div>
+                <div class="stat-label">⭐ Reviews</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Floating emoji background
+        const emojis = ['🎈', '⭐', '🌈', '🎉', '💫', '🎊', '🍕', '🚀', '🦄', '🎃'];
+        
+        function createFloatingEmoji() {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji-float';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = '-50px';
+            emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            emoji.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 5000);
+        }
+        
+        setInterval(createFloatingEmoji, 800);
+        
+        // Confetti effect
+        const confettiColors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 4000);
+        }
+        
+        setInterval(createConfetti, 300);
+        
+        // Card click effect
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.95) rotate(0deg)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
